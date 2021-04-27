@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/wupengcong/CLionProjects/algorithm/SelectionSort/SortTestHelper.h
+iostream
+-
+
+/Users/wupengcong/CLionProjects/algorithm/SelectionSort/Student.h
+iostream
+-
+
+/Users/wupengcong/CLionProjects/algorithm/SelectionSort/main.cpp
+iostream
+-
+Student.h
+/Users/wupengcong/CLionProjects/algorithm/SelectionSort/Student.h
+SortTestHelper.h
+/Users/wupengcong/CLionProjects/algorithm/SelectionSort/SortTestHelper.h
+
