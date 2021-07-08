@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/wupengcong/CLionProjects/algorithm/MergeSort/SortTestHelper.h
+iostream
+-
+
+/Users/wupengcong/CLionProjects/algorithm/MergeSort/main.cpp
+iostream
+-
+algorithm
+-
+SortTestHelper.h
+/Users/wupengcong/CLionProjects/algorithm/MergeSort/SortTestHelper.h
+
