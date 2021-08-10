@@ -5,7 +5,7 @@ using namespace std;
 
 template<typename T>
 void __merge(T arr[], int l, int mid, int r){
-    T aux[r-l+1];
+    T *aux = new T[r-l+1];
     for(int i=l; i<=r; i++){
         aux[i-l] = arr[i];
     }
@@ -65,7 +65,8 @@ int main() {
     int* arr2 =SortTestHelper::copyIntArray(arr, n);
     SortTestHelper::testSort("MergeBU", mergeSortBU, arr2, n);
     SortTestHelper::testSort("merge", mergeSort, arr, n);
-
+    delete arr;
+    delete arr2;
 
     return 0;
 }

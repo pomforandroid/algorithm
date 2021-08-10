@@ -6,6 +6,7 @@
 #define SELECTIONSORT_SORTTESTHELPER_H
 
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 namespace SortTestHelper{
