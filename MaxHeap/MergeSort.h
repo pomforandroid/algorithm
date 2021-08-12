@@ -1,7 +1,3 @@
-//
-// Created by liuyubobobo on 8/15/16.
-//
-
 #ifndef INC_05_HEAPIFY_MERGESORT_H
 #define INC_05_HEAPIFY_MERGESORT_H
 
@@ -12,68 +8,68 @@
 using namespace std;
 
 
-// å°†arr[l...mid]å’Œarr[mid+1...r]ä¸¤éƒ¨åˆ†è¿›è¡Œå½’å¹¶
-// å…¶ä¸­auxä¸ºå®Œæˆmergeè¿‡ç¨‹æ‰€éœ€è¦çš„è¾…åŠ©ç©ºé—´
+// ½«arr[l...mid]ºÍarr[mid+1...r]Á½²¿·Ö½øĞĞ¹é²¢
+// ÆäÖĞauxÎªÍê³Émerge¹ı³ÌËùĞèÒªµÄ¸¨Öú¿Õ¼ä
 template<typename  T>
-void __merge(T arr[], T aux[], int l, int mid, int r){
+void __merge(T arr[], T aux[], int l, int mid, int r) {
 
-    // ç”±äºauxçš„å¤§å°å’Œarrä¸€æ ·, æ‰€ä»¥æˆ‘ä»¬ä¹Ÿä¸éœ€è¦å¤„ç†auxç´¢å¼•çš„åç§»é‡
-    // è¿›ä¸€æ­¥èŠ‚çœäº†è®¡ç®—é‡:)
-    for( int i = l ; i <= r; i ++ )
+    // ÓÉÓÚauxµÄ´óĞ¡ºÍarrÒ»Ñù, ËùÒÔÎÒÃÇÒ²²»ĞèÒª´¦ÀíauxË÷ÒıµÄÆ«ÒÆÁ¿
+    // ½øÒ»²½½ÚÊ¡ÁË¼ÆËãÁ¿:)
+    for (int i = l; i <= r; i++)
         aux[i] = arr[i];
 
-    // åˆå§‹åŒ–ï¼ŒiæŒ‡å‘å·¦åŠéƒ¨åˆ†çš„èµ·å§‹ç´¢å¼•ä½ç½®lï¼›jæŒ‡å‘å³åŠéƒ¨åˆ†èµ·å§‹ç´¢å¼•ä½ç½®mid+1
-    int i = l, j = mid+1;
-    for( int k = l ; k <= r; k ++ ){
+    // ³õÊ¼»¯£¬iÖ¸Ïò×ó°ë²¿·ÖµÄÆğÊ¼Ë÷ÒıÎ»ÖÃl£»jÖ¸ÏòÓÒ°ë²¿·ÖÆğÊ¼Ë÷ÒıÎ»ÖÃmid+1
+    int i = l, j = mid + 1;
+    for (int k = l; k <= r; k++) {
 
-        if( i > mid ){  // å¦‚æœå·¦åŠéƒ¨åˆ†å…ƒç´ å·²ç»å…¨éƒ¨å¤„ç†å®Œæ¯•
-            arr[k] = aux[j]; j ++;
+        if (i > mid) {  // Èç¹û×ó°ë²¿·ÖÔªËØÒÑ¾­È«²¿´¦ÀíÍê±Ï
+            arr[k] = aux[j]; j++;
         }
-        else if( j > r ){  // å¦‚æœå³åŠéƒ¨åˆ†å…ƒç´ å·²ç»å…¨éƒ¨å¤„ç†å®Œæ¯•
-            arr[k] = aux[i]; i ++;
+        else if (j > r) {  // Èç¹ûÓÒ°ë²¿·ÖÔªËØÒÑ¾­È«²¿´¦ÀíÍê±Ï
+            arr[k] = aux[i]; i++;
         }
-        else if( aux[i] < aux[j] ) {  // å·¦åŠéƒ¨åˆ†æ‰€æŒ‡å…ƒç´  < å³åŠéƒ¨åˆ†æ‰€æŒ‡å…ƒç´ 
-            arr[k] = aux[i]; i ++;
+        else if (aux[i] < aux[j]) {  // ×ó°ë²¿·ÖËùÖ¸ÔªËØ < ÓÒ°ë²¿·ÖËùÖ¸ÔªËØ
+            arr[k] = aux[i]; i++;
         }
-        else{  // å·¦åŠéƒ¨åˆ†æ‰€æŒ‡å…ƒç´  >= å³åŠéƒ¨åˆ†æ‰€æŒ‡å…ƒç´ 
-            arr[k] = aux[j]; j ++;
+        else {  // ×ó°ë²¿·ÖËùÖ¸ÔªËØ >= ÓÒ°ë²¿·ÖËùÖ¸ÔªËØ
+            arr[k] = aux[j]; j++;
         }
     }
 
 }
 
-// ä½¿ç”¨ä¼˜åŒ–çš„å½’å¹¶æ’åºç®—æ³•, å¯¹arr[l...r]çš„èŒƒå›´è¿›è¡Œæ’åº
-// å…¶ä¸­auxä¸ºå®Œæˆmergeè¿‡ç¨‹æ‰€éœ€è¦çš„è¾…åŠ©ç©ºé—´
+// Ê¹ÓÃÓÅ»¯µÄ¹é²¢ÅÅĞòËã·¨, ¶Ôarr[l...r]µÄ·¶Î§½øĞĞÅÅĞò
+// ÆäÖĞauxÎªÍê³Émerge¹ı³ÌËùĞèÒªµÄ¸¨Öú¿Õ¼ä
 template<typename T>
-void __mergeSort(T arr[], T aux[], int l, int r){
+void __mergeSort(T arr[], T aux[], int l, int r) {
 
-    // å¯¹äºå°è§„æ¨¡æ•°ç»„, ä½¿ç”¨æ’å…¥æ’åº
-    if( r - l <= 15 ){
+    // ¶ÔÓÚĞ¡¹æÄ£Êı×é, Ê¹ÓÃ²åÈëÅÅĞò
+    if (r - l <= 15) {
         insertionSort(arr, l, r);
         return;
     }
 
-    int mid = (l+r)/2;
+    int mid = (l + r) / 2;
     __mergeSort(arr, aux, l, mid);
-    __mergeSort(arr, aux, mid+1, r);
+    __mergeSort(arr, aux, mid + 1, r);
 
-    // å¯¹äºarr[mid] <= arr[mid+1]çš„æƒ…å†µ,ä¸è¿›è¡Œmerge
-    // å¯¹äºè¿‘ä¹æœ‰åºçš„æ•°ç»„éå¸¸æœ‰æ•ˆ,ä½†æ˜¯å¯¹äºä¸€èˆ¬æƒ…å†µ,æœ‰ä¸€å®šçš„æ€§èƒ½æŸå¤±
-    if( arr[mid] > arr[mid+1] )
+    // ¶ÔÓÚarr[mid] <= arr[mid+1]µÄÇé¿ö,²»½øĞĞmerge
+    // ¶ÔÓÚ½üºõÓĞĞòµÄÊı×é·Ç³£ÓĞĞ§,µ«ÊÇ¶ÔÓÚÒ»°ãÇé¿ö,ÓĞÒ»¶¨µÄĞÔÄÜËğÊ§
+    if (arr[mid] > arr[mid + 1])
         __merge(arr, aux, l, mid, r);
 }
 
 
 template<typename T>
-void mergeSort(T arr[], int n){
+void mergeSort(T arr[], int n) {
 
-    // åœ¨ mergeSortä¸­, æˆ‘ä»¬ä¸€æ¬¡æ€§ç”³è¯·auxç©ºé—´,
-    // å¹¶å°†è¿™ä¸ªè¾…åŠ©ç©ºé—´ä»¥å‚æ•°å½¢å¼ä¼ é€’ç»™å®Œæˆå½’å¹¶æ’åºçš„å„ä¸ªå­å‡½æ•°
-    T *aux = new T[n];
+    // ÔÚ mergeSortÖĞ, ÎÒÃÇÒ»´ÎĞÔÉêÇëaux¿Õ¼ä,
+    // ²¢½«Õâ¸ö¸¨Öú¿Õ¼äÒÔ²ÎÊıĞÎÊ½´«µİ¸øÍê³É¹é²¢ÅÅĞòµÄ¸÷¸ö×Óº¯Êı
+    T* aux = new T[n];
 
-    __mergeSort( arr , aux, 0 , n-1 );
+    __mergeSort(arr, aux, 0, n - 1);
 
-    delete[] aux;   // ä½¿ç”¨C++, newå‡ºæ¥çš„ç©ºé—´ä¸è¦å¿˜è®°é‡Šæ”¾æ‰:)
+    delete[] aux;   // Ê¹ÓÃC++, new³öÀ´µÄ¿Õ¼ä²»ÒªÍü¼ÇÊÍ·Åµô:)
 }
 
 #endif //INC_05_HEAPIFY_MERGESORT_H

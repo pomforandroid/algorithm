@@ -37,6 +37,7 @@ private:
     }
 
 public:
+
     MaxHeap(int capicatity) {
         data = new Item[capicatity + 1];
         count = 0;

@@ -1,7 +1,3 @@
-//
-// Created by liuyubobobo on 8/15/16.
-//
-
 #ifndef INC_05_HEAPIFY_SORTTESTHELPER_H
 #define INC_05_HEAPIFY_SORTTESTHELPER_H
 
@@ -17,10 +13,10 @@ using namespace std;
 
 namespace SortTestHelper {
 
-    // ç”Ÿæˆæœ‰nä¸ªå…ƒç´ çš„éšæœºæ•°ç»„,æ¯ä¸ªå…ƒç´ çš„éšæœºèŒƒå›´ä¸º[rangeL, rangeR]
-    int *generateRandomArray(int n, int range_l, int range_r) {
+    // Éú³ÉÓĞn¸öÔªËØµÄËæ»úÊı×é,Ã¿¸öÔªËØµÄËæ»ú·¶Î§Îª[rangeL, rangeR]
+    int* generateRandomArray(int n, int range_l, int range_r) {
 
-        int *arr = new int[n];
+        int* arr = new int[n];
 
         srand(time(NULL));
         for (int i = 0; i < n; i++)
@@ -28,35 +24,35 @@ namespace SortTestHelper {
         return arr;
     }
 
-    // ç”Ÿæˆä¸€ä¸ªè¿‘ä¹æœ‰åºçš„æ•°ç»„
-    // é¦–å…ˆç”Ÿæˆä¸€ä¸ªå«æœ‰[0...n-1]çš„å®Œå…¨æœ‰åºæ•°ç»„, ä¹‹åéšæœºäº¤æ¢swapTimeså¯¹æ•°æ®
-    // swapTimeså®šä¹‰äº†æ•°ç»„çš„æ— åºç¨‹åº¦
-    int *generateNearlyOrderedArray(int n, int swapTimes){
+    // Éú³ÉÒ»¸ö½üºõÓĞĞòµÄÊı×é
+    // Ê×ÏÈÉú³ÉÒ»¸öº¬ÓĞ[0...n-1]µÄÍêÈ«ÓĞĞòÊı×é, Ö®ºóËæ»ú½»»»swapTimes¶ÔÊı¾İ
+    // swapTimes¶¨ÒåÁËÊı×éµÄÎŞĞò³Ì¶È
+    int* generateNearlyOrderedArray(int n, int swapTimes) {
 
-        int *arr = new int[n];
-        for(int i = 0 ; i < n ; i ++ )
+        int* arr = new int[n];
+        for (int i = 0; i < n; i++)
             arr[i] = i;
 
         srand(time(NULL));
-        for( int i = 0 ; i < swapTimes ; i ++ ){
-            int posx = rand()%n;
-            int posy = rand()%n;
-            swap( arr[posx] , arr[posy] );
+        for (int i = 0; i < swapTimes; i++) {
+            int posx = rand() % n;
+            int posy = rand() % n;
+            swap(arr[posx], arr[posy]);
         }
 
         return arr;
     }
 
-    // æ‹·è´æ•´å‹æ•°ç»„aä¸­çš„æ‰€æœ‰å…ƒç´ åˆ°ä¸€ä¸ªæ–°çš„æ•°ç»„, å¹¶è¿”å›æ–°çš„æ•°ç»„
-    int *copyIntArray(int a[], int n){
+    // ¿½±´ÕûĞÍÊı×éaÖĞµÄËùÓĞÔªËØµ½Ò»¸öĞÂµÄÊı×é, ²¢·µ»ØĞÂµÄÊı×é
+    int* copyIntArray(int a[], int n) {
 
-        int *arr = new int[n];
-        //* åœ¨VSä¸­, copyå‡½æ•°è¢«è®¤ä¸ºæ˜¯ä¸å®‰å…¨çš„, è¯·å¤§å®¶æ‰‹åŠ¨å†™ä¸€éforå¾ªç¯:)
-        copy(a, a+n, arr);
+        int* arr = new int[n];
+        //* ÔÚVSÖĞ, copyº¯Êı±»ÈÏÎªÊÇ²»°²È«µÄ, Çë´ó¼ÒÊÖ¶¯Ğ´Ò»±éforÑ­»·:)
+        copy(a, a + n, arr);
         return arr;
     }
 
-    // æ‰“å°arræ•°ç»„çš„æ‰€æœ‰å†…å®¹
+    // ´òÓ¡arrÊı×éµÄËùÓĞÄÚÈİ
     template<typename T>
     void printArray(T arr[], int n) {
 
@@ -67,7 +63,7 @@ namespace SortTestHelper {
         return;
     }
 
-    // åˆ¤æ–­arræ•°ç»„æ˜¯å¦æœ‰åº
+    // ÅĞ¶ÏarrÊı×éÊÇ·ñÓĞĞò
     template<typename T>
     bool isSorted(T arr[], int n) {
 
@@ -78,23 +74,23 @@ namespace SortTestHelper {
         return true;
     }
 
-    // æµ‹è¯•sortæ’åºç®—æ³•æ’åºarræ•°ç»„æ‰€å¾—åˆ°ç»“æœçš„æ­£ç¡®æ€§å’Œç®—æ³•è¿è¡Œæ—¶é—´
-    // å°†ç®—æ³•çš„è¿è¡Œæ—¶é—´æ‰“å°åœ¨æ§åˆ¶å°ä¸Š
+    // ²âÊÔsortÅÅĞòËã·¨ÅÅĞòarrÊı×éËùµÃµ½½á¹ûµÄÕıÈ·ĞÔºÍËã·¨ÔËĞĞÊ±¼ä
+    // ½«Ëã·¨µÄÔËĞĞÊ±¼ä´òÓ¡ÔÚ¿ØÖÆÌ¨ÉÏ
     template<typename T>
-    void testSort(const string &sortName, void (*sort)(T[], int), T arr[], int n) {
+    void testSort(const string& sortName, void (*sort)(T[], int), T arr[], int n) {
 
         clock_t startTime = clock();
         sort(arr, n);
         clock_t endTime = clock();
-        cout << sortName << " : " << double(endTime - startTime) / CLOCKS_PER_SEC << " s"<<endl;
+        cout << sortName << " : " << double(endTime - startTime) / CLOCKS_PER_SEC << " s" << endl;
 
         assert(isSorted(arr, n));
 
         return;
     }
 
-    // æµ‹è¯•sortæ’åºç®—æ³•æ’åºarræ•°ç»„æ‰€å¾—åˆ°ç»“æœçš„æ­£ç¡®æ€§å’Œç®—æ³•è¿è¡Œæ—¶é—´
-    // å°†ç®—æ³•çš„è¿è¡Œæ—¶é—´ä»¥doubleç±»å‹è¿”å›, å•ä½ä¸ºç§’(s)
+    // ²âÊÔsortÅÅĞòËã·¨ÅÅĞòarrÊı×éËùµÃµ½½á¹ûµÄÕıÈ·ĞÔºÍËã·¨ÔËĞĞÊ±¼ä
+    // ½«Ëã·¨µÄÔËĞĞÊ±¼äÒÔdoubleÀàĞÍ·µ»Ø, µ¥Î»ÎªÃë(s)
     template<typename T>
     double testSort(void (*sort)(T[], int), T arr[], int n) {
 

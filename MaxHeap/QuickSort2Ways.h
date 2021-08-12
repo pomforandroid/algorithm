@@ -1,7 +1,3 @@
-//
-// Created by liuyubobobo on 4/24/17.
-//
-
 #ifndef INC_05_HEAPIFY_QUICKSORT2WAYS_H
 #define INC_05_HEAPIFY_QUICKSORT2WAYS_H
 
@@ -11,65 +7,65 @@
 
 using namespace std;
 
-// åŒè·¯å¿«é€Ÿæ’åºçš„partition
-// è¿”å›p, ä½¿å¾—arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
+// Ë«Â·¿ìËÙÅÅĞòµÄpartition
+// ·µ»Øp, Ê¹µÃarr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
 template <typename T>
-int _partition2(T arr[], int l, int r){
+int _partition2(T arr[], int l, int r) {
 
-    // éšæœºåœ¨arr[l...r]çš„èŒƒå›´ä¸­, é€‰æ‹©ä¸€ä¸ªæ•°å€¼ä½œä¸ºæ ‡å®šç‚¹pivot
-    swap( arr[l] , arr[rand()%(r-l+1)+l] );
+    // Ëæ»úÔÚarr[l...r]µÄ·¶Î§ÖĞ, Ñ¡ÔñÒ»¸öÊıÖµ×÷Îª±ê¶¨µãpivot
+    swap(arr[l], arr[rand() % (r - l + 1) + l]);
     T v = arr[l];
 
     // arr[l+1...i) <= v; arr(j...r] >= v
-    int i = l+1, j = r;
-    while( true ){
-        // æ³¨æ„è¿™é‡Œçš„è¾¹ç•Œ, arr[i] < v, ä¸èƒ½æ˜¯arr[i] <= v
-        // æ€è€ƒä¸€ä¸‹ä¸ºä»€ä¹ˆ?
-        while( i <= r && arr[i] < v )
-            i ++;
+    int i = l + 1, j = r;
+    while (true) {
+        // ×¢ÒâÕâÀïµÄ±ß½ç, arr[i] < v, ²»ÄÜÊÇarr[i] <= v
+        // Ë¼¿¼Ò»ÏÂÎªÊ²Ã´?
+        while (i <= r && arr[i] < v)
+            i++;
 
-        // æ³¨æ„è¿™é‡Œçš„è¾¹ç•Œ, arr[j] > v, ä¸èƒ½æ˜¯arr[j] >= v
-        // æ€è€ƒä¸€ä¸‹ä¸ºä»€ä¹ˆ?
-        while( j >= l+1 && arr[j] > v )
-            j --;
+        // ×¢ÒâÕâÀïµÄ±ß½ç, arr[j] > v, ²»ÄÜÊÇarr[j] >= v
+        // Ë¼¿¼Ò»ÏÂÎªÊ²Ã´?
+        while (j >= l + 1 && arr[j] > v)
+            j--;
 
-        // å¯¹äºä¸Šé¢çš„ä¸¤ä¸ªè¾¹ç•Œçš„è®¾å®š, æœ‰çš„åŒå­¦åœ¨è¯¾ç¨‹çš„é—®ç­”åŒºæœ‰å¾ˆå¥½çš„å›ç­”:)
-        // å¤§å®¶å¯ä»¥å‚è€ƒ: http://coding.imooc.com/learn/questiondetail/4920.html
+        // ¶ÔÓÚÉÏÃæµÄÁ½¸ö±ß½çµÄÉè¶¨, ÓĞµÄÍ¬Ñ§ÔÚ¿Î³ÌµÄÎÊ´ğÇøÓĞºÜºÃµÄ»Ø´ğ:)
+        // ´ó¼Ò¿ÉÒÔ²Î¿¼: http://coding.imooc.com/learn/questiondetail/4920.html
 
-        if( i > j )
+        if (i > j)
             break;
 
-        swap( arr[i] , arr[j] );
-        i ++;
-        j --;
+        swap(arr[i], arr[j]);
+        i++;
+        j--;
     }
 
-    swap( arr[l] , arr[j]);
+    swap(arr[l], arr[j]);
 
     return j;
 }
 
-// å¯¹arr[l...r]éƒ¨åˆ†è¿›è¡Œå¿«é€Ÿæ’åº
+// ¶Ôarr[l...r]²¿·Ö½øĞĞ¿ìËÙÅÅĞò
 template <typename T>
-void _quickSort2Ways(T arr[], int l, int r){
+void _quickSort2Ways(T arr[], int l, int r) {
 
-    // å¯¹äºå°è§„æ¨¡æ•°ç»„, ä½¿ç”¨æ’å…¥æ’åºè¿›è¡Œä¼˜åŒ–
-    if( r - l <= 15 ){
-        insertionSort(arr,l,r);
+    // ¶ÔÓÚĞ¡¹æÄ£Êı×é, Ê¹ÓÃ²åÈëÅÅĞò½øĞĞÓÅ»¯
+    if (r - l <= 15) {
+        insertionSort(arr, l, r);
         return;
     }
 
-    // è°ƒç”¨åŒè·¯å¿«é€Ÿæ’åºçš„partition
+    // µ÷ÓÃË«Â·¿ìËÙÅÅĞòµÄpartition
     int p = _partition2(arr, l, r);
-    _quickSort2Ways(arr, l, p-1 );
-    _quickSort2Ways(arr, p+1, r);
+    _quickSort2Ways(arr, l, p - 1);
+    _quickSort2Ways(arr, p + 1, r);
 }
 
 template <typename T>
-void quickSort2Ways(T arr[], int n){
+void quickSort2Ways(T arr[], int n) {
 
     srand(time(NULL));
-    _quickSort2Ways(arr, 0, n-1);
+    _quickSort2Ways(arr, 0, n - 1);
 }
 
 #endif //INC_05_HEAPIFY_QUICKSORT2WAYS_H

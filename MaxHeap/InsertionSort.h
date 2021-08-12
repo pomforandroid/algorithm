@@ -12,30 +12,30 @@ using namespace std;
 
 
 template<typename T>
-void insertionSort(T arr[], int n){
+void insertionSort(T arr[], int n) {
 
-    for( int i = 1 ; i < n ; i ++ ) {
+    for (int i = 1; i < n; i++) {
 
         T e = arr[i];
         int j;
-        for (j = i; j > 0 && arr[j-1] > e; j--)
-            arr[j] = arr[j-1];
+        for (j = i; j > 0 && arr[j - 1] > e; j--)
+            arr[j] = arr[j - 1];
         arr[j] = e;
     }
 
     return;
 }
 
-// å¯¹arr[l...r]èŒƒå›´çš„æ•°ç»„è¿›è¡Œæ’å…¥æ’åº
+// ¶Ôarr[l...r]·¶Î§µÄÊı×é½øĞĞ²åÈëÅÅĞò
 template<typename T>
-void insertionSort(T arr[], int l, int r){
+void insertionSort(T arr[], int l, int r) {
 
-    for( int i = l+1 ; i <= r ; i ++ ) {
+    for (int i = l + 1; i <= r; i++) {
 
         T e = arr[i];
         int j;
-        for (j = i; j > l && arr[j-1] > e; j--)
-            arr[j] = arr[j-1];
+        for (j = i; j > l && arr[j - 1] > e; j--)
+            arr[j] = arr[j - 1];
         arr[j] = e;
     }
 

@@ -1,7 +1,3 @@
-//
-// Created by liuyubobobo on 4/24/17.
-//
-
 #ifndef INC_05_HEAPIFY_QUICKSORT3WAYS_H
 #define INC_05_HEAPIFY_QUICKSORT3WAYS_H
 
@@ -11,50 +7,50 @@
 
 using namespace std;
 
-// é€’å½’çš„ä¸‰è·¯å¿«é€Ÿæ’åºç®—æ³•
+// µİ¹éµÄÈıÂ·¿ìËÙÅÅĞòËã·¨
 template <typename T>
-void __quickSort3Ways(T arr[], int l, int r){
+void __quickSort3Ways(T arr[], int l, int r) {
 
-    // å¯¹äºå°è§„æ¨¡æ•°ç»„, ä½¿ç”¨æ’å…¥æ’åºè¿›è¡Œä¼˜åŒ–
-    if( r - l <= 15 ){
-        insertionSort(arr,l,r);
+    // ¶ÔÓÚĞ¡¹æÄ£Êı×é, Ê¹ÓÃ²åÈëÅÅĞò½øĞĞÓÅ»¯
+    if (r - l <= 15) {
+        insertionSort(arr, l, r);
         return;
     }
 
-    // éšæœºåœ¨arr[l...r]çš„èŒƒå›´ä¸­, é€‰æ‹©ä¸€ä¸ªæ•°å€¼ä½œä¸ºæ ‡å®šç‚¹pivot
-    swap( arr[l], arr[rand()%(r-l+1)+l ] );
+    // Ëæ»úÔÚarr[l...r]µÄ·¶Î§ÖĞ, Ñ¡ÔñÒ»¸öÊıÖµ×÷Îª±ê¶¨µãpivot
+    swap(arr[l], arr[rand() % (r - l + 1) + l]);
 
     T v = arr[l];
 
     int lt = l;     // arr[l+1...lt] < v
     int gt = r + 1; // arr[gt...r] > v
-    int i = l+1;    // arr[lt+1...i) == v
-    while( i < gt ){
-        if( arr[i] < v ){
-            swap( arr[i], arr[lt+1]);
-            i ++;
-            lt ++;
+    int i = l + 1;    // arr[lt+1...i) == v
+    while (i < gt) {
+        if (arr[i] < v) {
+            swap(arr[i], arr[lt + 1]);
+            i++;
+            lt++;
         }
-        else if( arr[i] > v ){
-            swap( arr[i], arr[gt-1]);
-            gt --;
+        else if (arr[i] > v) {
+            swap(arr[i], arr[gt - 1]);
+            gt--;
         }
-        else{ // arr[i] == v
-            i ++;
+        else { // arr[i] == v
+            i++;
         }
     }
 
-    swap( arr[l] , arr[lt] );
+    swap(arr[l], arr[lt]);
 
-    __quickSort3Ways(arr, l, lt-1);
+    __quickSort3Ways(arr, l, lt - 1);
     __quickSort3Ways(arr, gt, r);
 }
 
 template <typename T>
-void quickSort3Ways(T arr[], int n){
+void quickSort3Ways(T arr[], int n) {
 
     srand(time(NULL));
-    __quickSort3Ways( arr, 0, n-1);
+    __quickSort3Ways(arr, 0, n - 1);
 }
 
 #endif //INC_05_HEAPIFY_QUICKSORT3WAYS_H

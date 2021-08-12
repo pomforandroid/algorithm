@@ -1,7 +1,3 @@
-//
-// Created by liuyubobobo on 8/15/16.
-//
-
 #ifndef INC_05_HEAPIFY_QUICKSORT_H
 #define INC_05_HEAPIFY_QUICKSORT_H
 
@@ -13,47 +9,47 @@
 using namespace std;
 
 
-// å¯¹arr[l...r]éƒ¨åˆ†è¿›è¡Œpartitionæ“ä½œ
-// è¿”å›p, ä½¿å¾—arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
+// ¶Ôarr[l...r]²¿·Ö½øĞĞpartition²Ù×÷
+// ·µ»Øp, Ê¹µÃarr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
 template <typename T>
-int _partition(T arr[], int l, int r){
+int _partition(T arr[], int l, int r) {
 
-    // éšæœºåœ¨arr[l...r]çš„èŒƒå›´ä¸­, é€‰æ‹©ä¸€ä¸ªæ•°å€¼ä½œä¸ºæ ‡å®šç‚¹pivot
-    swap( arr[l] , arr[rand()%(r-l+1)+l] );
+    // Ëæ»úÔÚarr[l...r]µÄ·¶Î§ÖĞ, Ñ¡ÔñÒ»¸öÊıÖµ×÷Îª±ê¶¨µãpivot
+    swap(arr[l], arr[rand() % (r - l + 1) + l]);
 
     T v = arr[l];
     int j = l;
-    for( int i = l + 1 ; i <= r ; i ++ )
-        if( arr[i] < v ){
-            j ++;
-            swap( arr[j] , arr[i] );
+    for (int i = l + 1; i <= r; i++)
+        if (arr[i] < v) {
+            j++;
+            swap(arr[j], arr[i]);
         }
 
-    swap( arr[l] , arr[j]);
+    swap(arr[l], arr[j]);
 
     return j;
 }
 
-// å¯¹arr[l...r]éƒ¨åˆ†è¿›è¡Œå¿«é€Ÿæ’åº
+// ¶Ôarr[l...r]²¿·Ö½øĞĞ¿ìËÙÅÅĞò
 template <typename T>
-void _quickSort(T arr[], int l, int r){
+void _quickSort(T arr[], int l, int r) {
 
-    // å¯¹äºå°è§„æ¨¡æ•°ç»„, ä½¿ç”¨æ’å…¥æ’åºè¿›è¡Œä¼˜åŒ–
-    if( r - l <= 15 ){
-        insertionSort(arr,l,r);
+    // ¶ÔÓÚĞ¡¹æÄ£Êı×é, Ê¹ÓÃ²åÈëÅÅĞò½øĞĞÓÅ»¯
+    if (r - l <= 15) {
+        insertionSort(arr, l, r);
         return;
     }
 
     int p = _partition(arr, l, r);
-    _quickSort(arr, l, p-1 );
-    _quickSort(arr, p+1, r);
+    _quickSort(arr, l, p - 1);
+    _quickSort(arr, p + 1, r);
 }
 
 template <typename T>
-void quickSort(T arr[], int n){
+void quickSort(T arr[], int n) {
 
     srand(time(NULL));
-    _quickSort(arr, 0, n-1);
+    _quickSort(arr, 0, n - 1);
 }
 
 #endif //INC_05_HEAPIFY_QUICKSORT_H
