@@ -18,6 +18,27 @@ private:
 	Item* data;
 	int count;
     int capicatity;
+    void shiftUp(int k) {
+        while (k > 1 && data[k / 2] < data[k]) {
+            swap(data[k / 2], data[k]);
+            k = k / 2;
+        }
+    }
+
+    void shiftDown(int k) {
+        while (k * 2 <= count) // k*2 is k's left child ,if k * 2 >= count ,it means that k have no left child
+        {
+            int j = k * 2;
+            if (j + 1 <= count && data[j + 1] > data[j])
+                j += 1;
+
+            if (data[k] > data[j])
+                break;
+
+            swap(data[k], data[j]);
+            k = j; // update the k 
+        }
+    }
 
 public:
 	MaxHeap(int capicatity) {
@@ -38,19 +59,21 @@ public:
 		return count == 0;
 	}
 
-	void shiftUp(int k) {
-		while (k>1 && data[k/2]<data[k]) {
-			swap(data[k / 2], data[k]);
-			k = k / 2;
-		}
-	}
-
 	void insert(Item item) {
         assert(count + 1 <= this->capicatity);
 		data[count + 1] = item; //index begin at the 1 due to the MaxHeap 
 		count++;
 		shiftUp(count);
 	}
+
+    Item extractMax() {
+        assert(count > 0);
+        Item item = data[1];
+        swap(data[1], data[count]);
+        count--;
+        shiftDown(1);
+        return item;
+    }
 
 
 public:
@@ -156,6 +179,13 @@ int main()
 	for (int i = 0; i < 30;i++) {
 		maxheap.insert(rand() % 100);
 	}
+
+    cout << "extract Max" << endl;
+    while (!maxheap.isEmpty())
+    {
+        int max = maxheap.extractMax();
+        cout << max << " -> " << endl;
+    }
 
     maxheap.testPrint();
 
