@@ -46,6 +46,26 @@ public:
 		return count == 0;
 	}
 
+	void insert(Key key, Value value) {
+		root = insert(root, key, value);
+	}
+
+	Node* insert(Node* node, Key key, Value value) {
+		if (node == null) {
+			count++;
+			return new Node(key, value);
+		}
+		if (node->key == key) {
+			node->value = value;
+		}
+		else if (node->key > key) { // so key should be node 's left child
+			node->left = insert(node.left, key, value);
+		}
+		else {
+			node->right = insert(node.right, key, value);
+		}
+		return node;
+	}
 };
 
 int main()
