@@ -109,10 +109,12 @@ public:
     }
 
     Item getItem(int i) {
+        assert(contain(i));
         return data[i + 1);
     }
 
     void change(int i, Item item) {
+        assert(contain(i));
         i += 1;
         data[i] = item;
         int j = reverse[i];
