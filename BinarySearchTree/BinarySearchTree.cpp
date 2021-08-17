@@ -66,6 +66,41 @@ public:
 		}
 		return node;
 	}
+
+	bool contain(Key key) {
+		return contain(root, key);
+	}
+
+	Value* search(Key key) {
+		return search(root, Key key);
+	}
+
+	// Returns whether the binary tree with "root" as the root node has a node whose key is "key" 
+	bool contain(Node* root, Key key) {
+		if (root == NULL)
+			return false;
+		
+		if (root->key == key)
+			return true;
+		else if (key < root->key)
+			return contain(root->left, key);
+		else
+			return contain(root->right, key);
+	}
+	// Returns the Value when the binary tree with "node" as the root node has a node whose key is "key" 
+	Value* search(Node* node, Key key) {
+		if (root == NULL)
+			return NULL;
+
+		if (root->key == key)
+			return &(node->value);
+		else if (key < root->key)
+			return search(root->left, key);
+		else
+			return search(root->right, key);
+	}
+
+	
 };
 
 int main()
