@@ -7,6 +7,7 @@
 #include <string>
 #include "SequenceST.h"
 #include "FileOps.h"
+#include <queue>
 
 using namespace std;
 
@@ -77,6 +78,21 @@ public:
 		postOrder(root);
 	}
 
+	void levelOrder() {
+		queue<Node> q = new queue<Node>();
+		q.push(root);
+			
+		while (!q.empty()) {
+			Node* front = q.front();
+			q.pop();
+			cout << node->key << endl;
+			if(node->left)
+				q.push(node->left);
+			if(node->right)
+				q.push(node->right);
+		}
+	}
+
 private:
 
 	void destroy(Node* node) {
@@ -113,8 +129,7 @@ private:
 	}
 
 
-
-
+	
 	Node* insert(Node* node, Key key, Value value) {
 		if (node == NULL) {
 			count++;
