@@ -40,7 +40,7 @@ public:
 	}
 
 	~BST() {
-		// TODO 
+		destroy(root);
 	}
 
 	int size() {
@@ -54,6 +54,66 @@ public:
 	void insert(Key key, Value value) {
 		root = insert(root, key, value);
 	}
+
+	bool contain(Key key) {
+		return contain(root, key);
+	}
+
+	Value* search(Key key) {
+		return search(root, key);
+	}
+	//preorder traversal
+	void preOrder() {
+		preOrder(root);
+	}
+
+	//in-order traversal
+	void inOrder() {
+		inOrder(root);
+	}
+
+	//post-order traversal
+	void postOrder() {
+		postOrder(root);
+	}
+
+private:
+
+	void destroy(Node* node) {
+		if (node != NULL) {
+			destroy(node->left);
+			destroy(node->right);
+			delete node;
+			count--;
+		}
+	}
+
+	void postOrder(Node* node) {
+		if (node != NULL) {
+			preOrder(node->left);
+			preOrder(node->right);
+			cout << node->key << endl;
+		}
+	}
+
+	void inOrder(Node* node) {
+		if (node != NULL) {
+			preOrder(node->left);
+			cout << node->key << endl;
+			preOrder(node->right);
+		}
+	}
+
+	void preOrder(Node* node) {
+		if (node != NULL) {
+			cout << node->key << endl;
+			preOrder(node->left);
+			preOrder(node->right);
+		}
+	}
+
+
+
 
 	Node* insert(Node* node, Key key, Value value) {
 		if (node == NULL) {
@@ -72,19 +132,11 @@ public:
 		return node;
 	}
 
-	bool contain(Key key) {
-		return contain(root, key);
-	}
-
-	Value* search(Key key) {
-		return search(root, key);
-	}
-
 	// Returns whether the binary tree with "root" as the root node has a node whose key is "key" 
 	bool contain(Node* node, Key key) {
 		if (node == NULL)
 			return false;
-		
+
 		if (node->key == key)
 			return true;
 		else if (key < node->key)
@@ -105,7 +157,6 @@ public:
 			return search(node->right, key);
 	}
 
-	
 };
 
 int main()
