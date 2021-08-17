@@ -2,6 +2,11 @@
 //
 
 #include "BinarySearchTree.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include "SequenceST.h"
+#include "FileOps.h"
 
 using namespace std;
 
@@ -19,7 +24,7 @@ private:
 		Node(Key key, Value value) {
 			this->key = key;
 			this->value = value;
-			this->left = this->value = null;
+			this->left = this->right = NULL;
 		}
 
 	};
@@ -51,7 +56,7 @@ public:
 	}
 
 	Node* insert(Node* node, Key key, Value value) {
-		if (node == null) {
+		if (node == NULL) {
 			count++;
 			return new Node(key, value);
 		}
@@ -59,10 +64,10 @@ public:
 			node->value = value;
 		}
 		else if (node->key > key) { // so key should be node 's left child
-			node->left = insert(node.left, key, value);
+			node->left = insert(node->left, key, value);
 		}
 		else {
-			node->right = insert(node.right, key, value);
+			node->right = insert(node->right, key, value);
 		}
 		return node;
 	}
@@ -72,32 +77,32 @@ public:
 	}
 
 	Value* search(Key key) {
-		return search(root, Key key);
+		return search(root, key);
 	}
 
 	// Returns whether the binary tree with "root" as the root node has a node whose key is "key" 
-	bool contain(Node* root, Key key) {
-		if (root == NULL)
+	bool contain(Node* node, Key key) {
+		if (node == NULL)
 			return false;
 		
-		if (root->key == key)
+		if (node->key == key)
 			return true;
-		else if (key < root->key)
-			return contain(root->left, key);
+		else if (key < node->key)
+			return contain(node->left, key);
 		else
-			return contain(root->right, key);
+			return contain(node->right, key);
 	}
 	// Returns the Value when the binary tree with "node" as the root node has a node whose key is "key" 
 	Value* search(Node* node, Key key) {
-		if (root == NULL)
+		if (node == NULL)
 			return NULL;
 
-		if (root->key == key)
+		if (node->key == key)
 			return &(node->value);
-		else if (key < root->key)
-			return search(root->left, key);
+		else if (key < node->key)
+			return search(node->left, key);
 		else
-			return search(root->right, key);
+			return search(node->right, key);
 	}
 
 	
@@ -106,5 +111,54 @@ public:
 int main()
 {
 	cout << "Hello CMake." << endl;
+
+	string filename = "D:\\wupengcong\\c++\\algorithm\\BinarySearchTree\\bible.txt";
+	vector<string> words;
+	if (FileOps::readFile(filename, words)) {
+		cout << "There are totally " << words.size() << " words in " << filename << endl;
+		cout << endl;
+
+		//test BST 
+		time_t startTime = clock();
+		// Count the frequency of all words in the Bible
+		BST<string, int> bst = BST<string, int>();
+		for (vector<string>::iterator iter = words.begin(); iter != words.end(); iter++) {
+			int* res = bst.search(*iter);
+			if (res == NULL)
+				bst.insert(*iter, 1);
+			else (* res)++;
+		}
+
+		if (bst.contain("god"))
+			cout << "'god' : " << *bst.search("god") << endl;
+		else 
+			cout << "No word 'god' in " << filename << endl;
+
+		time_t endTime = clock();
+
+		cout << "BST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC << " s." << endl;
+		cout << endl;
+
+		//test SST
+		startTime = clock();
+		SequenceST<string, int> sst = SequenceST<string, int>();
+		for (vector<string>::iterator iter = words.begin(); iter != words.end(); iter++) {
+			int* res = sst.search(*iter);
+			if (res == NULL)
+				sst.insert(*iter, 1);
+			else
+				(*res)++;
+		}
+
+		if (sst.contain("god"))
+			cout << "'god' : " << *sst.search("god") << endl;
+		else
+			cout << "No word 'god' in " << filename << endl;
+
+		endTime = clock();
+
+		cout << "SST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC << " s." << endl;
+	}
+
 	return 0;
 }
