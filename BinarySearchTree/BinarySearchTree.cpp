@@ -93,7 +93,66 @@ public:
 		}
 	}
 
+	Key minimum() {
+		assert(count != 0);
+		Node* minNode = minimum(root);
+		return minNode->key;
+	}
+
+	Node* maximum() {
+		assert(count != 0);
+		Node* maxNode = maximum(root);
+		return maxNode->key;
+	}
+
+	void removeMin() {
+		if(root)
+			root = removeMin(root);
+	}
+
+	void removeMax() {
+		if(root)
+			root = removeMax(root);
+	}
+
 private:
+
+	Node* removeMin(Node* node) {
+		if (node->left == NULL) {
+			Node* rightNode = node->right;
+			delete node;
+			count--;
+			return rightNode;
+		}
+		node->left = removeMin(node->left);//splicing
+		return node;
+	}
+
+	Node* removeMax(Node* node) {
+		if (node->right == NULL) {
+			Node* leftNode = node->left;
+			delete node;
+			count--;
+			return leftNode;
+		}
+		node->right = removeMax(node->right);
+		return node;
+	}
+
+	//return the node with max value in BST whose root node is "node"
+	Node* maximum(Node* node) {
+		if (node->right == NULL) {
+			return node;
+		}
+		return maximum(node->right);
+	}
+	//return the node with min value in BST whose root node is "node"
+	Node* minimum(Node* node) {
+		if (node->left == NULL) {
+			return node;
+		}
+		return minimum(node->left);
+	}
 
 	void destroy(Node* node) {
 		if (node != NULL) {
