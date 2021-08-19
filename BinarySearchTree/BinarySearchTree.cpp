@@ -86,7 +86,7 @@ public:
 	}
 
 	void levelOrder() {
-		queue<Node> q = new queue<Node>();
+		queue<Node> q;
 		q.push(root);
 			
 		while (!q.empty()) {
