@@ -31,11 +31,17 @@ namespace UF4 {
 
 		int find(int p) {
 			assert(p >= 0 && p < this->count);
-			while (p != parent[p]) {
+			/*while (p != parent[p]) {
 				parent[p] = parent[parent[p]];
 				p = parent[p];
 			}
-			return p;
+			return p;*/
+
+			if (p != parent[p]) {
+				parent[p] = find(parent[p]);
+			}
+			return parent[p];
+
 		}
 
 		bool isConnected(int p, int q) {
