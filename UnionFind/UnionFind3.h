@@ -12,16 +12,16 @@ namespace UF3 {
 	private:
 		int count;
 		int* parent;
-		int* size;
+		int* rank;
 
 	public:
 		UnionFind(int n) {
 			this->count = n;
 			parent = new int[n];
-			size = new int[n];
+			rank = new int[n];
 			for (int i = 0; i < n;i++) {
 				parent[i] = i;
-				size[i] = 1;
+				rank[i] = 1;
 			}
 		}
 
@@ -47,13 +47,15 @@ namespace UF3 {
 
 			if (rootPID == rootQID)
 				return;
-			if (size[rootPID] < size[rootQID]) {
+			if (rank[rootPID] < rank[rootQID]) {
 				parent[rootPID] = rootQID;
-				size[rootQID] += size[rootPID];
+			}
+			else if (rank[rootPID] > rank[rootQID]) {
+				parent[rootQID] = rootPID;
 			}
 			else {
-				parent[rootQID] = rootPID;
-				size[rootPID] += size[rootQID];
+				parent[rootPID] = rootQID;
+				rank[rootQID] += 1;
 			}
 		}
 	};
