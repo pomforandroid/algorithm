@@ -6,6 +6,7 @@
 #include "DenseGraph.h"
 #include "ReadGraph.h"
 #include "Component.h"
+#include "Path.h"
 
 using namespace std;
 
@@ -111,10 +112,22 @@ void testComponent() {
 	cout << "TestG2.txt, Using Dense Graph, Component Count: " << component4.count() << endl;
 }
 
+void testFindPath() {
+	string filename = "D://wupengcong//c++//algorithm//Graph//testG2.txt";
+	SparseGraph  g = SparseGraph(6, false);
+	ReadGraph<SparseGraph> readGraph(g, filename);
+	g.show();
+	cout << endl;
+
+	Path<SparseGraph> dfs(g, 0);
+	cout << "DFS : ";
+	dfs.showPath(5);
+}
+
 int main()
 {
 	
-	testComponent();
+	testFindPath();
 
 	return 0;
 
