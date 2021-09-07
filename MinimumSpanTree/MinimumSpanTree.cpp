@@ -10,6 +10,7 @@
 #include "PrimMST.h"
 #include "Edge.h"
 #include <vector>
+#include "KruskalMST.h"
 
 using namespace std;
 
@@ -48,7 +49,7 @@ void minTreeTest() {
     cout << endl;
 }
 
-int main2()
+int main()
 {
     string filename = "D:\\wupengcong\\c++\\algorithm\\MinimumSpanTree\\testG1.txt";
     int V = 8;
@@ -76,6 +77,16 @@ int main2()
     cout << "The MST weight is: " << primMST.result() << endl;
 
     cout << endl;
+
+
+    // Test Kruskal MST
+    cout << "Test Kruskal MST:" << endl;
+    KruskalMST<SparseGraph<double>, double> kruskalMST(g);
+    mst = kruskalMST.mstEdges();
+    for (int i = 0; i < mst.size(); i++)
+        cout << mst[i] << endl;
+    cout << "The MST weight is: " << kruskalMST.result() << endl;
+
 
   
     return 0;
